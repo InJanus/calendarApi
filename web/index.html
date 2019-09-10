@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+
+<html>
+    <head>
+        <link rel="stylesheet" href="index.css"></link>
+        <script src="homepage.js"></script>
+    </head>
+    <body>
+        
+        <h4>Testing api</h4>
+        <h2>PLEASE SELECT TABLE!</h2>
+        <select class="mytable" id="selectbox">
+        </select>
+        <button class="btn refresh" onclick="update_list()">Refresh Tables</button>
+        <button class="btn delete" onclick="delete_list()">delete table</button><br>
+        
+        <button class="btn gettasks" onclick="getTasks()">Get tasks</button>
+        <button class="btn deleteall" onclick="deleteAll()">delete all</button>
+
+        <button class="btn newtask" onclick="newTask()">new task</button>
+
+        <br>
+
+        Title: <input type="text" id="title"><br>
+        Discritipn: <input type="text" id="disc"><br>
+        Date: <input type="date" id="date"><br>
+        Done?: <input type="checkbox" id="done"><br>
+        <pre id="output" class="pre"></pre>
+
+    </body>
+</html>

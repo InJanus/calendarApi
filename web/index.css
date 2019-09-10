@@ -1,0 +1,22 @@
+.btn{
+    margin-bottom: 10px;
+}
+.gettasks{
+    color: black;
+}
+.newtask{
+    color: black;
+}
+.output{
+    outline-style: solid;
+    outline-color: red;
+}
+.pre{
+    color: red;
+}
+.mytable{
+    margin-bottom: 10px;
+}
+h2{
+    color: red;
+}

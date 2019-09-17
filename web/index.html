@@ -5,21 +5,22 @@
         <link rel="stylesheet" href="index.css"></link>
         <script src="homepage.js"></script>
     </head>
-    <body>
+    <body onload="update_list()">
         
         <h4>Testing api</h4>
         <h2>PLEASE SELECT TABLE!</h2>
         <select class="mytable" id="selectbox">
         </select>
-        <button class="btn refresh" onclick="update_list()">Refresh Tables</button>
-        <button class="btn delete" onclick="delete_list()">delete table</button><br>
-        
+        <!-- <button class="btn refresh" onclick="update_list()">Refresh Tables</button> -->
+        <button class="btn delete" onclick="delete_list()">delete table</button>
+        <button class="btn new" onclick="new_list()">new table</button><br>
         <button class="btn gettasks" onclick="getTasks()">Get tasks</button>
         <button class="btn deleteall" onclick="deleteAll()">delete all</button>
-
         <button class="btn newtask" onclick="newTask()">new task</button>
+        <button class="btn edittask" onclick="editTask()">edit task</button>
+        <button class="btn left" onclick="moveLeft()"><</button>
+        <button class="btn right" onclick="moveRight()">></button><br>
 
-        <br>
 
         Title: <input type="text" id="title"><br>
         Discritipn: <input type="text" id="disc"><br>

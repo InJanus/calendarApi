@@ -42,14 +42,14 @@ def ret_task(conn, tablename):
     for row in cur.description:
         col.append(row[0])
 
-    retval = {'tasks':{}}
+    retval = {tablename:{}}
     count = 0
     for row in rows:
         mylist = {count: {}}
         for i in range(4):
             myinput = {col[i]:row[i]}
             mylist[count].update(myinput)
-        retval['tasks'].update(mylist)
+        retval[tablename].update(mylist)
         count = count + 1
     return retval
 
@@ -59,8 +59,7 @@ def tablenames(conn):
     tablenames = cur.fetchall()
     mylist = {'lists': {}}
     for i in range(len(tablenames)):
-        mylist['lists'].update({i:tablenames[0][i]})
-
+        mylist['lists'].update({i:tablenames[i]})
     mylist.update({'length':len(tablenames)})
     return mylist
 
@@ -69,6 +68,12 @@ def tabledelete(conn, tablename):
     cur.execute('DROP TABLE ' + tablename)
     conn.commit()
     return {'status':'Table Deleted'}
+
+def tablenew(conn, tablename):
+    cur = conn.cursor()
+    cur.execute('CREATE TABLE IF NOT EXISTS ' + tablename + '(title STRING, disc STRING, date STRING, done STRING)')
+    conn.commit()
+    return {'status':'Table ' + tablename + ' created'}
 
 @app.route('/api/1.0/tasksget/', methods=['GET'])
 def get_tasks():
@@ -98,11 +103,17 @@ def delete_tasks():
     deleteAll_task(connect, tablename)
     return jsonify({'status':"Done"})
 
-@app.route("/api/1.0/tabledelete", methods=['DELETE'])
+@app.route("/api/1.0/tabledelete/", methods=['DELETE'])
 def delete_table():
     connect = connectDB("data/info")
     tablename = request.args.get('table')
     return jsonify(tabledelete(connect, tablename))
+
+@app.route("/api/1.0/tablenew/", methods=['PUT'])
+def new_table():
+    connect = connectDB("data/info")
+    tablename = request.form['table']
+    return jsonify(tablenew(connect, tablename))
 
 if __name__ == '__main__':
     app.run(debug=True)

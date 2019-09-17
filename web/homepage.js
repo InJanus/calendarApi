@@ -49,11 +49,36 @@ function update_list(){
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
       var select = document.getElementById("selectbox");
       var length = JSON.parse(this.responseText).length;
-      console.log(this.responseText);
       select.options.length = length;
       for(var i =0; i < length; i++){
         select.options[i] = new Option(JSON.parse(this.responseText).lists[i], JSON.parse(this.responseText).lists[i]);
       }
+    }
+  };
+}
+
+function new_list(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("PUT", web + "api/1.0/tablenew/", true);
+  xhttp.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+  var param = "table=" + prompt("Please enter new table name");
+  xhttp.send(param);
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        document.getElementById("output").innerHTML = this.responseText;
+        update_list();
+    }
+  };
+}
+
+function delete_list(){
+  var xhttp = new XMLHttpRequest();
+  xhttp.open("DELETE", web + "api/1.0/tabledelete/" + "?" + "table=" + document.getElementById('selectbox').value, true);
+  xhttp.send();
+  xhttp.onreadystatechange = function() {
+    if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
+        document.getElementById("output").innerHTML = this.responseText;
+        update_list();
     }
   };
 }

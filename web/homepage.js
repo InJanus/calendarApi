@@ -1,4 +1,5 @@
 var web = "http://127.0.0.1:5000/";
+var myswitch = false;
 
 function getTasks(){
     //get element by id for paragraph
@@ -81,4 +82,41 @@ function delete_list(){
         update_list();
     }
   };
+}
+
+function editTask(){
+  if(myswitch){
+    document.getElementById('editpannel').className = "newedit nocolor";
+    myswitch = false;
+    document.getElementById("title").value = "";
+    document.getElementById("disc").value = "";
+    document.getElementById("date").value = "";
+    document.getElementById("done").value = "";
+    document.getElementById("output").innerHTML = "";
+  }else{
+    document.getElementById('editpannel').className = "newedit";
+    myswitch = true;
+    //edit mode
+    var xhttp = new XMLHttpRequest();
+    var tablename = document.getElementById("selectbox").value;
+    var params = "table=" + tablename;
+    xhttp.open("GET", web + "api/1.0/tasksget/" + "?" + params, true);
+    xhttp.send();
+    xhttp.onreadystatechange = function() {
+      if (this.readyState == 4 && this.status == 200) {
+        //var length = length(this.responseText[tablename]);
+        var iteration = "0";
+        var response = JSON.parse(this.responseText);
+        document.getElementById("title").value = response[tablename][iteration]["title"];
+        document.getElementById("disc").value = response[tablename][iteration]["disc"];
+        document.getElementById("date").value = response[tablename][iteration]["date"];
+        document.getElementById("done").value = response[tablename][iteration]["done"];
+        document.getElementById("output").innerHTML = this.responseText; //this sets the api request
+      }
+    };
+  }
+}
+
+function moveRight(){
+  
 }

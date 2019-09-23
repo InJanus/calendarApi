@@ -20,3 +20,13 @@
 h2{
     color: red;
 }
+.newedit{
+    background-color: greenyellow;
+    width: fit-content;
+    padding: 5px;
+    padding-bottom: 0px;
+}
+
+.nocolor{
+    background-color: white;
+}

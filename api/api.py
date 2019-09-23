@@ -86,7 +86,6 @@ def gettablenames():
     connect = connectDB("data/info")
     return jsonify(tablenames(connect))
 
-
 @app.route("/api/1.0/tasksput/", methods=['PUT'])
 def post_tasks():
     connect = connectDB("data/info")

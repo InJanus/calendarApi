@@ -22,7 +22,8 @@ function newTask(){
   var param = "title=" + document.getElementById('title').value + 
   "&disc=" + document.getElementById('disc').value + 
   "&date=" + document.getElementById('date').value + 
-  "&done=" + "false" + "&table=" + document.getElementById('selectbox').value;
+  "&done=" + document.getElementById('done').checked + 
+  "&table=" + document.getElementById('selectbox').value;
   xhttp.send(param);
   xhttp.onreadystatechange = function() {
     if (this.readyState === XMLHttpRequest.DONE && this.status === 200) {
@@ -91,7 +92,7 @@ function editTask(){
     document.getElementById("title").value = "";
     document.getElementById("disc").value = "";
     document.getElementById("date").value = "";
-    document.getElementById("done").value = "";
+    document.getElementById("done").checked = false;
     document.getElementById("output").innerHTML = "";
   }else{
     document.getElementById('editpannel').className = "newedit";
@@ -110,7 +111,7 @@ function editTask(){
         document.getElementById("title").value = response[tablename][iteration]["title"];
         document.getElementById("disc").value = response[tablename][iteration]["disc"];
         document.getElementById("date").value = response[tablename][iteration]["date"];
-        document.getElementById("done").value = response[tablename][iteration]["done"];
+        document.getElementById("done").checked = response[tablename][iteration]["done"];
         document.getElementById("output").innerHTML = this.responseText; //this sets the api request
       }
     };

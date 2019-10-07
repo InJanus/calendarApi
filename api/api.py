@@ -70,10 +70,12 @@ def tabledelete(conn, tablename):
     return {'status':'Table Deleted'}
 
 def tablenew(conn, tablename):
-    cur = conn.cursor()
-    cur.execute('CREATE TABLE IF NOT EXISTS ' + tablename + '(title STRING, disc STRING, date STRING, done STRING)')
-    conn.commit()
-    return {'status':'Table ' + tablename + ' created'}
+    if tablename != 'null':
+        print(tablename)
+        cur = conn.cursor()
+        cur.execute('CREATE TABLE IF NOT EXISTS ' + tablename + '(title STRING, disc STRING, date STRING, done STRING)')
+        conn.commit()
+        return {'status':'Table ' + tablename + ' created'}
 
 @app.route('/api/1.0/tasksget/', methods=['GET'])
 def get_tasks():
